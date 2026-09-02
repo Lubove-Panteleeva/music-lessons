@@ -1,0 +1,676 @@
+/* =========================================
+   1. ГЛОБАЛЬНЫЕ СТИЛИ И СБРОС
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+   2. ШАПКА И НАВИГАЦИЯ
+   ========================================= */
+.main-header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.main-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #666;
+}
+
+.main-nav {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.grade-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.grade-btn:hover {
+    background: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   3. СЕКЦИИ И СЕТКИ (Главная страница)
+   ========================================= */
+.grade-section, .games-section {
+    background: white;
+    margin: 30px auto;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden; /* Сохраняет скругление углов при сворачивании */
+}
+
+/* Заголовки внутри развернутых секций (если используются без grade-header) */
+.grade-section > h2, .games-section > h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: #667eea;
+    padding: 40px 40px 10px 40px;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #667eea;
+}
+
+.lessons-grid, .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 0 40px 40px 40px;
+}
+
+.lesson-card, .game-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid #667eea;
+    transition: all 0.3s;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.lesson-card:hover, .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.lesson-card h3, .game-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.lesson-card p, .game-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.start-btn, .game-card button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.start-btn:hover, .game-card button:hover {
+    background: #764ba2;
+    transform: scale(1.02);
+}
+
+.more-lessons {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-style: italic;
+    padding-bottom: 20px;
+}
+
+/* =========================================
+   4. СВОРАЧИВАЕМЫЕ СЕКЦИИ (Аккордеон)
+   ========================================= */
+.grade-header, .games-section .grade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 25px 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.grade-header:hover, .games-section .grade-header:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.grade-header h2 {
+    margin: 0;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    border: none;
+    padding: 0;
+}
+
+.grade-arrow {
+    font-size: 1.5em;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+/* Состояние: свернуто */
+.grade-section.collapsed .grade-arrow,
+.games-section.collapsed .grade-arrow {
+    transform: rotate(-90deg);
+}
+
+.grade-section.collapsed .grade-header,
+.games-section.collapsed .grade-header {
+    border-radius: 15px;
+}
+
+/* Состояние: развернуто */
+.grade-section:not(.collapsed) .grade-header,
+.games-section:not(.collapsed) .grade-header {
+    border-radius: 15px 15px 0 0;
+}
+
+.grade-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, margin 0.3s ease;
+}
+
+.grade-section:not(.collapsed) .grade-content,
+.games-section:not(.collapsed) .grade-content {
+    max-height: 10000px; /* Достаточно большое значение для любого контента */
+}
+
+/* =========================================
+   5. СТРАНИЦА УРОКА
+   ========================================= */
+.lesson-page {
+    background: white;
+    min-height: 100vh;
+    padding: 40px 0;
+}
+
+.back-btn {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateX(-5px);
+}
+
+.lesson-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.lesson-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.lesson-subtitle {
+    font-size: 1.3em;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+.lesson-meta {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.meta-item {
+    background: rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.lesson-content {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.lesson-section {
+    margin-bottom: 40px;
+}
+
+.lesson-section h2 {
+    color: #667eea;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.lesson-section p {
+    margin-bottom: 15px;
+    text-align: justify;
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+/* =========================================
+   6. МЕДИА И АУДИО (Источники)
+   ========================================= */
+.sources-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.sources-container p {
+    margin: 18px 0;
+    line-height: 1.8;
+    font-size: 1.05em;
+}
+
+.source-link {
+    display: inline-block;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dashed #667eea;
+    margin: 0 6px;
+    transition: all 0.2s ease;
+}
+
+.source-link:hover {
+    color: #764ba2;
+    border-bottom-style: solid;
+    transform: translateY(-1px);
+}
+
+.separator {
+    color: #999;
+    margin: 0 2px;
+}
+
+.media-container {
+    margin: 15px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.media-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.media-icon {
+    font-size: 1.3em;
+}
+
+.vk-video-container {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background: #000;
+}
+
+.vk-video-container iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.audio-track {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.audio-track audio {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* =========================================
+   7. ОПРОС (QUIZ)
+   ========================================= */
+.quiz-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 40px;
+}
+
+.quiz-container h2 {
+    color: #667eea;
+    margin-bottom: 25px;
+}
+
+.quiz-question {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.quiz-question h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-option {
+    padding: 12px 20px;
+    background: #f0f0f0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.quiz-option:hover {
+    background: #e0e0e0;
+    border-color: #667eea;
+}
+
+.quiz-option.correct {
+    background: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+.quiz-option.incorrect {
+    background: #f44336;
+    color: white;
+    border-color: #f44336;
+}
+
+/* =========================================
+   8. ИГРЫ (Кроссворд, Филворд, Эмодзи)
+   ========================================= */
+.game-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px auto;
+    max-width: 900px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* --- Кроссворд --- */
+.crossword-wrapper, .wordsearch-wrapper {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+}
+
+.crossword-title, .wordsearch-title {
+    font-family: 'Montserrat', sans-serif;
+    color: #667eea;
+    font-size: 2em;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.crossword-grid, .wordsearch-grid {
+    display: grid;
+    gap: 2px;
+    margin: 30px auto;
+    background: #333;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.crossword-grid { max-width: 600px; }
+.wordsearch-grid { max-width: 500px; }
+
+.crossword-cell, .wordsearch-cell {
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.crossword-cell { width: 40px; height: 40px; font-size: 1.2em; }
+.wordsearch-cell { width: 35px; height: 35px; font-size: 1.1em; cursor: pointer; user-select: none; border-radius: 3px; }
+
+.crossword-cell.active { background: white; box-shadow: inset 0 0 0 1px #ddd; }
+.crossword-cell.active:hover { background: #f0f0f0; transform: scale(1.05); }
+.crossword-cell.black { background: #333; }
+
+.crossword-cell input {
+    width: 100%; height: 100%; border: none; text-align: center;
+    font-size: 1.3em; font-weight: bold; text-transform: uppercase;
+    background: transparent; color: #333; outline: none; padding: 0; margin: 0;
+}
+
+.crossword-cell input:focus {
+    background: #e3f2fd;
+    box-shadow: inset 0 0 0 2px #667eea;
+}
+
+.cell-number {
+    position: absolute; top: 2px; left: 3px;
+    font-size: 10px; font-weight: bold; color: #667eea;
+    pointer-events: none; z-index: 10;
+}
+
+.wordsearch-cell:hover { background: #e3f2fd; transform: scale(1.1); }
+.wordsearch-cell.selected { background: #667eea !important; color: white !important; transform: scale(1.1); box-shadow: 0 0 10px rgba(102, 126, 234, 0.5); }
+.wordsearch-cell.found { background: #4CAF50 !important; color: white !important; animation: wordFound 0.5s ease; }
+
+/* Подсказки и списки слов */
+.crossword-clues, .wordsearch-words {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 25px;
+    border-radius: 10px;
+    margin: 30px 0;
+}
+
+.crossword-clues h3, .wordsearch-words h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #667eea;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.clues-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.clue-item {
+    background: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    font-size: 1em;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+}
+
+.clue-item:hover { transform: translateX(5px); box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+.clue-item strong { color: #667eea; font-size: 1.1em; margin-right: 5px; }
+
+.words-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.word-item {
+    display: inline-block;
+    padding: 10px 20px;
+    background: white;
+    color: #667eea;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1em;
+    border: 2px solid #667eea;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.word-item:hover { background: #667eea; color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+.word-item.found { background: #4CAF50 !important; color: white !important; border-color: #4CAF50 !important; text-decoration: line-through; opacity: 0.7; }
+
+/* Кнопки и результаты игр */
+.check-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white; border: none; padding: 15px 40px; border-radius: 25px;
+    font-size: 1.1em; font-weight: 600; cursor: pointer; display: block;
+    margin: 20px auto; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+.check-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6); }
+.check-btn:active { transform: translateY(-1px); }
+
+.crossword-result {
+    text-align: center; font-size: 1.3em; font-weight: bold; color: #667eea;
+    margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 10px;
+}
+
+/* --- Эмодзи и Прогресс --- */
+.emoji-game { text-align: center; }
+.emoji-puzzle { font-size: 3em; margin: 30px 0; padding: 30px; background: #f5f7fa; border-radius: 15px; }
+.emoji-answer { margin-top: 20px; }
+.emoji-answer input { padding: 12px; font-size: 1.1em; border: 2px solid #ddd; border-radius: 8px; width: 300px; max-width: 100%; }
+
+.wordsearch-progress {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px; border-radius: 10px; margin: 20px 0;
+}
+
+.progress-bar {
+    background: #e0e0e0; height: 30px; border-radius: 15px; overflow: hidden;
+    margin-bottom: 10px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%); height: 100%;
+    transition: width 0.5s ease; display: flex; align-items: center;
+    justify-content: center; color: white; font-weight: bold; font-size: 0.9em;
+}
+
+.progress-text { text-align: center; font-size: 1.1em; color: #667eea; font-weight: 600; margin: 0; }
+
+/* =========================================
+   9. ФУТЕР И АНИМАЦИИ
+   ========================================= */
+footer {
+    background: rgba(0,0,0,0.3);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 50px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wordFound {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+/* =========================================
+   10. АДАПТИВНОСТЬ (Единый блок)
+   ========================================= */
+@media (max-width: 768px) {
+    /* Главная страница */
+    .main-header h1 { font-size: 2em; }
+    .grade-header, .games-section .grade-header { padding: 15px 20px; }
+    .grade-header h2 { font-size: 1.3em; }
+    .grade-arrow { font-size: 1.2em; }
+    .lessons-grid, .games-grid { grid-template-columns: 1fr; padding: 0 20px 20px 20px; }
+    
+    /* Страница урока */
+    .lesson-content { padding: 20px; }
+    .lesson-header h1 { font-size: 1.8em; }
+    .lesson-meta { gap: 10px; }
+    
+    /* Игры */
+    .crossword-cell { width: 30px; height: 30px; }
+    .crossword-cell input { font-size: 1em; }
+    .cell-number { font-size: 8px; top: 1px; left: 2px; }
+    .wordsearch-cell { width: 28px; height: 28px; font-size: 0.9em; }
+    .clues-list { grid-template-columns: 1fr; }
+    .crossword-wrapper, .wordsearch-wrapper, .game-container { padding: 20px; }
+    .vk-video-container iframe { height: 200px !important; }
+    .progress-bar { height: 25px; }
+    .progress-text { font-size: 0.9em; }
+}
