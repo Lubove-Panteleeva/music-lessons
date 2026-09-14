@@ -216,6 +216,38 @@ const gamesData = {
       { answer: "ЦЕЛЬ", clue: "То, чего хочет достичь исследователь" },
       { answer: "ИСТОЧНИК", clue: "Откуда берется информация для исследования" }
     ]
+  },
+
+  // ===== 8 КЛАСС - УРОК 3 (НОВЫЙ БЛОК) =====
+  crossword_grade8_lesson3: {
+    title: "Музыкальная панорама мира",
+    words: [
+      { word: "ФЛАМЕНКО", clue: "Испанский музыкальный жанр и танец с гитарой и кастаньетами" },
+      { word: "ДЖЕМБЕ", clue: "Африканский барабан в форме кубка" },
+      { word: "РАГА", clue: "Мелодическая основа индийской классической музыки" },
+      { word: "КОТО", clue: "Традиционный японский струнный щипковый инструмент" },
+      { word: "САМБА", clue: "Бразильский музыкальный жанр и карнавальный танец" }
+    ]
+  },
+  wordsearch_grade8_lesson3: {
+    title: "Инструменты и жанры мира",
+    words: ["ФЛАМЕНКО", "ДЖЕМБЕ", "РАГА", "КОТО", "САМБА", "ДЖАЗ", "БЛЮЗ", "ВОЛЫНКА"]
+  },
+  emoji_grade8_lesson3: {
+    puzzles: [
+      { emoji: "🇪🇸💃🎸", answer: "Фламенко", hint: "Страстный испанский танец" },
+      { emoji: "🥁🌍🔥", answer: "Джембе", hint: "Главный африканский барабан" },
+      { emoji: "🇯🇵🎵🎋", answer: "Кото", hint: "Японский струнный инструмент" },
+      { emoji: "🇧🇷🎉🎺", answer: "Самба", hint: "Ритм бразильского карнавала" },
+      { emoji: "🎷🎹🗽", answer: "Джаз", hint: "Музыкальный жанр, зародившийся в Америке" }
+    ]
+  },
+  rebus_grade8_lesson3: {
+    puzzles: [
+      { answer: "ДЖАЗ", clue: "Синкопированная музыка, зародившаяся в США" },
+      { answer: "САМБА", clue: "Ритм бразильского карнавала (СА + МБА)" },
+      { answer: "РАГА", clue: "Основа индийской мелодии (РА + ГА)" }
+    ]
   }
 };
 
@@ -227,18 +259,18 @@ function initCrossword(data) {
     const container = document.getElementById('crossword-container');
     if (!container || !data) return;
 
-    let html = '<div class="crossword-simple">';
+    let html = `<h3 style="margin-bottom: 20px; color: #333;">📝 ${data.title}</h3><div class="crossword-simple">`;
     data.words.forEach((item, index) => {
         html += `
-            <div class="crossword-item">
+            <div class="crossword-item" style="margin-bottom: 15px;">
                 <strong>${index + 1}.</strong> ${item.clue}<br>
-                <input type="text" data-answer="${item.word}" placeholder="Введите слово" autocomplete="off">
+                <input type="text" data-answer="${item.word}" placeholder="Введите слово" autocomplete="off" style="margin-top: 5px; padding: 8px; width: 100%; max-width: 300px; border: 1px solid #ccc; border-radius: 5px;">
             </div>
         `;
     });
     html += '</div>';
-    html += '<button class="btn-submit" onclick="checkCrosswordAnswers()">Проверить</button>';
-    html += '<div id="crossword-result"></div>';
+    html += '<button class="btn-submit" onclick="checkCrosswordAnswers()" style="margin-top: 15px; padding: 10px 25px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Проверить</button>';
+    html += '<div id="crossword-result" style="margin-top: 15px; font-weight: bold;"></div>';
 
     container.innerHTML = html;
 }
@@ -263,7 +295,8 @@ window.checkCrosswordAnswers = function() {
 
     const result = document.getElementById('crossword-result');
     if (result) {
-        result.innerHTML = `<div class="result-message ${correct === inputs.length ? 'success' : 'error'}">Правильно: ${correct} из ${inputs.length}</div>`;
+        const isSuccess = correct === inputs.length;
+        result.innerHTML = `<div class="result-message" style="padding: 10px; border-radius: 5px; background: ${isSuccess ? '#d4edda' : '#f8d7da'}; color: ${isSuccess ? '#155724' : '#721c24'};">Правильно: ${correct} из ${inputs.length}</div>`;
     }
 };
 
@@ -271,12 +304,12 @@ function initWordSearch(data) {
     const container = document.getElementById('wordsearch-container');
     if (!container || !data) return;
 
-    let html = '<div class="wordsearch-list"><h4>Найдите слова:</h4><ul>';
+    let html = `<h3 style="margin-bottom: 20px; color: #333;">🔤 ${data.title}</h3><div class="wordsearch-list" style="background: white; padding: 20px; border-radius: 10px;"><h4>Найдите слова:</h4><ul style="columns: 2; list-style-type: none; padding: 0;">`;
     data.words.forEach(word => {
-        html += `<li>${word}</li>`;
+        html += `<li style="padding: 5px 0; font-weight: 600; color: #667eea;">${word}</li>`;
     });
     html += '</ul></div>';
-    html += '<p class="hint">💡 Подсказка: слова можно искать по горизонтали, вертикали и диагонали.</p>';
+    html += '<p class="hint" style="margin-top: 15px; color: #666;">💡 Подсказка: в полной версии здесь будет интерактивная сетка букв. А пока найдите эти слова в тексте урока!</p>';
 
     container.innerHTML = html;
 }
@@ -295,16 +328,18 @@ function initEmojiGame(data) {
         }
 
         const item = data[currentIndex];
-        const emojiDisplay = item.emoji || item.emojis || "❓";
+        const emojiDisplay = item.emoji || "❓";
         
         container.innerHTML = `
-            <div class="emoji-game">
-                <div class="emoji-display">${emojiDisplay}</div>
-                <p class="hint">Подсказка: ${item.hint}</p>
-                <input type="text" id="emoji-answer" placeholder="Ваш ответ" class="game-input" autocomplete="off">
-                <button class="btn-submit" onclick="checkEmojiAnswer()">Проверить</button>
-                <div id="emoji-result"></div>
-                <p style="margin-top: 15px; color: #636e72;">Вопрос ${currentIndex + 1} из ${data.length}</p>
+            <div class="emoji-game" style="text-align: center; background: white; padding: 30px; border-radius: 15px;">
+                <h3 style="color: #333;">😊 Эмодзи-шарада</h3>
+                <div class="emoji-display" style="font-size: 4em; margin: 20px 0;">${emojiDisplay}</div>
+                <p class="hint" style="color: #666; font-style: italic;">Подсказка: ${item.hint}</p>
+                <input type="text" id="emoji-answer" placeholder="Ваш ответ" class="game-input" autocomplete="off" style="padding: 10px; width: 80%; max-width: 300px; border: 1px solid #ccc; border-radius: 5px; margin: 15px 0;">
+                <br>
+                <button class="btn-submit" onclick="checkEmojiAnswer()" style="padding: 10px 25px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Проверить</button>
+                <div id="emoji-result" style="margin-top: 15px; min-height: 30px;"></div>
+                <p style="margin-top: 20px; color: #999;">Вопрос ${currentIndex + 1} из ${data.length}</p>
             </div>
         `;
     }
@@ -318,26 +353,29 @@ function initEmojiGame(data) {
         const correctAnswer = data[currentIndex].answer.toLowerCase();
 
         if (userAnswer === correctAnswer) {
-            result.innerHTML = '<div class="result-message success">✓ Правильно!</div>';
+            result.innerHTML = '<div class="result-message success" style="color: #00b894; font-weight: bold;">✓ Правильно!</div>';
             score++;
         } else {
-            result.innerHTML = `<div class="result-message error">✗ Правильный ответ: ${data[currentIndex].answer}</div>`;
+            result.innerHTML = `<div class="result-message error" style="color: #d63031; font-weight: bold;">✗ Правильный ответ: ${data[currentIndex].answer}</div>`;
         }
+
+        // Блокируем ввод после ответа
+        input.disabled = true;
 
         setTimeout(() => {
             currentIndex++;
             showEmoji();
-        }, 1500);
+        }, 2000);
     };
 
     function showResults() {
         const percentage = Math.round((score / data.length) * 100);
         container.innerHTML = `
-            <div class="quiz-results">
+            <div class="quiz-results" style="text-align: center; background: white; padding: 30px; border-radius: 15px;">
                 <h3>🎉 Результаты эмодзи-шарады</h3>
-                <p>Правильных ответов: ${score} из ${data.length}</p>
-                <p>Процент: ${percentage}%</p>
-                <button class="btn-submit" onclick="location.reload()">Играть снова</button>
+                <p style="font-size: 1.2em;">Правильных ответов: <strong>${score}</strong> из <strong>${data.length}</strong></p>
+                <p style="font-size: 1.5em; color: #667eea; font-weight: bold;">${percentage}%</p>
+                <button class="btn-submit" onclick="location.reload()" style="margin-top: 20px; padding: 10px 25px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer;">Играть снова</button>
             </div>
         `;
     }
@@ -349,19 +387,19 @@ function initRebus(data) {
     const container = document.getElementById('rebus-container');
     if (!container || !data) return;
 
-    let html = '';
+    let html = `<h3 style="margin-bottom: 20px; color: #333;">🧩 Разгадайте ребусы</h3>`;
     data.puzzles.forEach((puzzle, index) => {
         html += `
-            <div class="rebus-item">
+            <div class="rebus-item" style="background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; border-left: 4px solid #667eea;">
                 <p><strong>Ребус ${index + 1}:</strong> ${puzzle.clue}</p>
                 <div style="font-size:2em; margin:15px 0; text-align:center;">
-                    <div style="background:white; padding:20px; border-radius:10px; border:2px dashed #667eea; display:inline-block;">
-                        🎨 [Изображение ребуса]
+                    <div style="background:#f8f9fa; padding:20px; border-radius:10px; border:2px dashed #667eea; display:inline-block; color: #999;">
+                        🎨 [Здесь будет изображение ребуса]
                     </div>
                 </div>
-                <input type="text" class="rebus-input" data-answer="${puzzle.answer}" placeholder="Ваш ответ" autocomplete="off">
-                <button class="btn-submit" onclick="checkRebusAnswer(this)">Проверить</button>
-                <div class="rebus-result"></div>
+                <input type="text" class="rebus-input" data-answer="${puzzle.answer}" placeholder="Ваш ответ" autocomplete="off" style="padding: 8px; width: 100%; max-width: 300px; border: 1px solid #ccc; border-radius: 5px;">
+                <button class="btn-submit" onclick="checkRebusAnswer(this)" style="margin-top: 10px; padding: 8px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">Проверить</button>
+                <div class="rebus-result" style="margin-top: 10px; font-weight: bold;"></div>
             </div>
         `;
     });
@@ -377,51 +415,121 @@ window.checkRebusAnswer = function(button) {
     const userAnswer = input.value.trim().toLowerCase();
     
     if (userAnswer === answer) {
-        result.innerHTML = '<div class="result-message success">✓ Правильно!</div>';
+        result.innerHTML = '<div class="result-message success" style="color: #00b894;">✓ Правильно!</div>';
         input.style.borderColor = '#00b894';
+        input.style.background = '#d4edda';
+        input.disabled = true;
+        button.disabled = true;
+        button.style.opacity = '0.6';
     } else {
-        result.innerHTML = `<div class="result-message error">✗ Правильный ответ: ${input.dataset.answer}</div>`;
+        result.innerHTML = `<div class="result-message error" style="color: #d63031;">✗ Правильный ответ: ${input.dataset.answer}</div>`;
         input.style.borderColor = '#d63031';
+        input.style.background = '#f8d7da';
     }
 };
 
 // ============================================
-// АВТОМАТИЧЕСКАЯ ИНИЦИАЛИЗАЦИЯ ИГР НА СТРАНИЦЕ УРОКА
+// ГЛАВНАЯ ФУНКЦИЯ ЗАПУСКА ИГРЫ (Связывает HTML кнопки с данными)
+// ============================================
+window.openGame = function(gameType, grade, lesson) {
+    // Находим или создаем контейнер для активной игры на странице урока
+    let container = document.getElementById('active-game-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'active-game-container';
+        container.className = 'active-game-container';
+        container.style.cssText = 'background: #f8f9fa; padding: 30px; border-radius: 15px; margin: 30px 0; border: 2px solid #667eea; box-shadow: 0 4px 15px rgba(0,0,0,0.1);';
+
+        // Вставляем его в конец основного контента урока
+        const lessonContent = document.querySelector('.lesson-content') || document.body;
+        lessonContent.appendChild(container);
+    }
+
+    container.innerHTML = '<h3 style="text-align:center; color: #667eea;">⏳ Загрузка игры...</h3>';
+
+    const keyPrefix = `grade${grade}_lesson${lesson}`;
+    let data = null;
+    let initFunction = null;
+    let containerId = '';
+
+    switch(gameType) {
+        case 'crossword':
+            data = gamesData[`crossword_${keyPrefix}`];
+            initFunction = initCrossword;
+            containerId = 'crossword-container';
+            break;
+        case 'wordsearch':
+            data = gamesData[`wordsearch_${keyPrefix}`];
+            initFunction = initWordSearch;
+            containerId = 'wordsearch-container';
+            break;
+        case 'emoji':
+            data = gamesData[`emoji_${keyPrefix}`];
+            initFunction = initEmojiGame;
+            containerId = 'emoji-container';
+            break;
+        case 'rebus':
+            data = gamesData[`rebus_${keyPrefix}`];
+            initFunction = initRebus;
+            containerId = 'rebus-container';
+            break;
+    }
+
+    if (data && initFunction) {
+        // Создаем временный контейнер внутри active-game-container для конкретной игры
+        const gameDiv = document.createElement('div');
+        gameDiv.id = containerId;
+        container.innerHTML = ''; // Очищаем "Загрузку"
+        container.appendChild(gameDiv);
+
+        // Добавляем кнопку "Закрыть игру"
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '✖ Закрыть игру';
+        closeBtn.style.cssText = 'display: block; margin: 20px auto 0; padding: 10px 20px; background: #f44336; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: background 0.2s;';
+        closeBtn.onmouseover = () => closeBtn.style.background = '#d32f2f';
+        closeBtn.onmouseout = () => closeBtn.style.background = '#f44336';
+        closeBtn.onclick = () => { 
+            container.innerHTML = ''; 
+            // Плавная прокрутка обратно к заголовку игр
+            document.querySelector('.games-section')?.scrollIntoView({ behavior: 'smooth' });
+        };
+        container.appendChild(closeBtn);
+
+        // Запускаем инициализацию конкретной игры
+        initFunction(data);
+
+        // Прокручиваем страницу к появившейся игре
+        setTimeout(() => {
+            container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+    } else {
+        container.innerHTML = `
+            <h3 style="text-align:center; color: #f44336;">😕 Игра пока не готова</h3>
+            <p style="text-align:center; color: #666;">Данные для игры "${gameType}" (${grade} класс, ${lesson} урок) еще не добавлены в базу.</p>
+            <button onclick="document.getElementById('active-game-container').innerHTML=''" style="display:block; margin: 20px auto; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer;">Закрыть</button>
+        `;
+    }
+};
+
+// ============================================
+// АВТОМАТИЧЕСКАЯ ИНИЦИАЛИЗАЦИЯ (Fallback)
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, находимся ли мы на странице урока
+    // Этот блок сработает, если игры нужно загрузить сразу при открытии страницы, 
+    // а не по клику на кнопку.
     if (document.querySelector('.lesson-page')) {
         const path = window.location.pathname;
-        // Извлекаем номер урока и класса из имени файла (например, lesson3-grade7.html)
         const match = path.match(/lesson(\d+)-grade(\d+)\.html/);
         
         if (match) {
             const lesson = match[1];
             const grade = match[2];
             
-            // Инициализируем кроссворд, если есть данные и контейнер
-            const crosswordData = gamesData[`crossword_grade${grade}_lesson${lesson}`];
-            if (crosswordData && document.getElementById('crossword-container')) {
-                initCrossword(crosswordData);
-            }
-            
-            // Инициализируем филворд
-            const wordsearchData = gamesData[`wordsearch_grade${grade}_lesson${lesson}`];
-            if (wordsearchData && document.getElementById('wordsearch-container')) {
-                initWordSearch(wordsearchData);
-            }
-            
-            // Инициализируем эмодзи-шараду
-            const emojiData = gamesData[`emoji_grade${grade}_lesson${lesson}`];
-            if (emojiData && document.getElementById('emoji-container')) {
-                initEmojiGame(emojiData);
-            }
-            
-            // Инициализируем ребусы
-            const rebusData = gamesData[`rebus_grade${grade}_lesson${lesson}`];
-            if (rebusData && document.getElementById('rebus-container')) {
-                initRebus(rebusData);
-            }
+            // Если на странице уже есть статические контейнеры (например, для демо), заполняем их
+            if (document.getElementById('crossword-container')) initCrossword(gamesData[`crossword_grade${grade}_lesson${lesson}`]);
+            if (document.getElementById('wordsearch-container')) initWordSearch(gamesData[`wordsearch_grade${grade}_lesson${lesson}`]);
+            if (document.getElementById('emoji-container')) initEmojiGame(gamesData[`emoji_grade${grade}_lesson${lesson}`]);
+            if (document.getElementById('rebus-container')) initRebus(gamesData[`rebus_grade${grade}_lesson${lesson}`]);
         }
     }
 });
