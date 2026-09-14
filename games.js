@@ -126,7 +126,7 @@ const gamesData = {
     ]
   },
 
-  // ===== 7 КЛАСС - УРОК 3 (НОВЫЙ!) =====
+  // ===== 7 КЛАСС - УРОК 3 =====
   crossword_grade7_lesson3: {
     title: "Народный календарь",
     words: [
@@ -221,7 +221,6 @@ const gamesData = {
 
 // ============================================
 // УНИВЕРСАЛЬНЫЕ ФУНКЦИИ ИНИЦИАЛИЗАЦИИ ИГР
-// (Работают как с данными из gamesData, так и с inline-данными из HTML)
 // ============================================
 
 function initCrossword(data) {
@@ -244,7 +243,6 @@ function initCrossword(data) {
     container.innerHTML = html;
 }
 
-// Уникальное имя функции, чтобы не было конфликтов с другими скриптами
 window.checkCrosswordAnswers = function() {
     const inputs = document.querySelectorAll('.crossword-simple input');
     let correct = 0;
@@ -278,7 +276,7 @@ function initWordSearch(data) {
         html += `<li>${word}</li>`;
     });
     html += '</ul></div>';
-    html += '<p class="hint">💡 Подсказка: в полной версии игры слова можно искать по горизонтали, вертикали и диагонали в интерактивной сетке.</p>';
+    html += '<p class="hint">💡 Подсказка: слова можно искать по горизонтали, вертикали и диагонали.</p>';
 
     container.innerHTML = html;
 }
@@ -297,7 +295,6 @@ function initEmojiGame(data) {
         }
 
         const item = data[currentIndex];
-        // Используем item.emoji (как в gamesData), а не item.emojis
         const emojiDisplay = item.emoji || item.emojis || "❓";
         
         container.innerHTML = `
@@ -360,7 +357,7 @@ function initRebus(data) {
                 <div style="font-size:2em; margin:15px 0; text-align:center;">
                     <div style="background:white; padding:20px; border-radius:10px; border:2px dashed #667eea; display:inline-block;">
                         🎨 [Изображение ребуса]
-                    each
+                    </div>
                 </div>
                 <input type="text" class="rebus-input" data-answer="${puzzle.answer}" placeholder="Ваш ответ" autocomplete="off">
                 <button class="btn-submit" onclick="checkRebusAnswer(this)">Проверить</button>
@@ -387,3 +384,44 @@ window.checkRebusAnswer = function(button) {
         input.style.borderColor = '#d63031';
     }
 };
+
+// ============================================
+// АВТОМАТИЧЕСКАЯ ИНИЦИАЛИЗАЦИЯ ИГР НА СТРАНИЦЕ УРОКА
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем, находимся ли мы на странице урока
+    if (document.querySelector('.lesson-page')) {
+        const path = window.location.pathname;
+        // Извлекаем номер урока и класса из имени файла (например, lesson3-grade7.html)
+        const match = path.match(/lesson(\d+)-grade(\d+)\.html/);
+        
+        if (match) {
+            const lesson = match[1];
+            const grade = match[2];
+            
+            // Инициализируем кроссворд, если есть данные и контейнер
+            const crosswordData = gamesData[`crossword_grade${grade}_lesson${lesson}`];
+            if (crosswordData && document.getElementById('crossword-container')) {
+                initCrossword(crosswordData);
+            }
+            
+            // Инициализируем филворд
+            const wordsearchData = gamesData[`wordsearch_grade${grade}_lesson${lesson}`];
+            if (wordsearchData && document.getElementById('wordsearch-container')) {
+                initWordSearch(wordsearchData);
+            }
+            
+            // Инициализируем эмодзи-шараду
+            const emojiData = gamesData[`emoji_grade${grade}_lesson${lesson}`];
+            if (emojiData && document.getElementById('emoji-container')) {
+                initEmojiGame(emojiData);
+            }
+            
+            // Инициализируем ребусы
+            const rebusData = gamesData[`rebus_grade${grade}_lesson${lesson}`];
+            if (rebusData && document.getElementById('rebus-container')) {
+                initRebus(rebusData);
+            }
+        }
+    }
+});
