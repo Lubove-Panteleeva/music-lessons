@@ -12,10 +12,10 @@ function openLesson(grade, lessonNumber) {
     localStorage.setItem('currentGrade', grade);
     localStorage.setItem('currentLesson', lessonNumber);
     
-    // Формируем правильное имя файла (например: lesson1-grade6.html)
+    // Формируем правильное имя файла (например: lesson3-grade7.html)
     const fileName = `lesson${lessonNumber}-grade${grade}.html`;
     
-    // Перенаправляем на страницу урока с параметром
+    // Перенаправляем на страницу урока
     window.location.href = `${fileName}?lesson=${lessonNumber}`;
 }
 
@@ -26,9 +26,17 @@ function completeLesson(grade, lessonNumber) {
     
     const percentage = calculateTotalProgress(grade);
     
-    alert(`🎉 Поздравляем! Вы успешно завершили Урок ${lessonNumber}!\nВаш прогресс: ${percentage}% от всего курса ${grade} класса.`);
+    // Визуальное изменение кнопки
+    const btn = event.target;
+    btn.textContent = '✅ Урок успешно завершен!';
+    btn.style.background = '#4CAF50';
+    btn.disabled = true;
     
-    window.location.href = 'index.html';
+    alert(`🎉 Поздравляем! Вы успешно завершили Урок ${lessonNumber}!\nВаш общий прогресс в ${grade} классе: ${percentage}%`);
+    
+    // Опционально: можно убрать редирект, чтобы ученик остался на странице и сделал игры, 
+    // или оставить, как у вас было:
+    // setTimeout(() => { window.location.href = 'index.html'; }, 1500);
 }
 
 // Функция подсчета общего прогресса
@@ -46,12 +54,24 @@ function calculateTotalProgress(grade) {
     return percentage;
 }
 
-// Функция открытия игры
+// УМНАЯ функция открытия игры
 function openGame(gameType, grade = 6, lesson = 1) {
-    localStorage.setItem('currentGame', gameType);
-    localStorage.setItem('currentGameGrade', grade);
-    localStorage.setItem('currentGameLesson', lesson);
-    window.location.href = `game.html?game=${gameType}&grade=${grade}&lesson=${lesson}`;
+    // Проверяем, находимся ли мы на странице урока (где игры уже встроены в HTML)
+    const isLessonPage = document.querySelector('.lesson-page') || document.querySelector('.game-block');
+    
+    if (isLessonPage) {
+        // Если да, просто плавно скроллим к секции с играми на этой же странице
+        const gamesSection = document.querySelector('.games-section') || document.querySelector('.game-container');
+        if (gamesSection) {
+            gamesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    } else {
+        // Если мы на главной странице (index.html), перенаправляем на отдельную страницу игры
+        localStorage.setItem('currentGame', gameType);
+        localStorage.setItem('currentGameGrade', grade);
+        localStorage.setItem('currentGameLesson', lesson);
+        window.location.href = `game.html?game=${gameType}&grade=${grade}&lesson=${lesson}`;
+    }
 }
 
 // ============================================
@@ -63,6 +83,12 @@ function toggleGrade(gradeId) {
         gradeSection.classList.toggle('collapsed');
         const isCollapsed = gradeSection.classList.contains('collapsed');
         localStorage.setItem(`${gradeId}_collapsed`, isCollapsed);
+        
+        // Обновляем иконку стрелочки
+        const arrow = document.getElementById(`arrow-${gradeId}`);
+        if (arrow) {
+            arrow.textContent = isCollapsed ? '▶' : '▼';
+        }
     }
 }
 
@@ -71,7 +97,7 @@ function toggleGrade(gradeId) {
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. Плавная прокрутка к секциям по якорям
+    // 1. Плавная прокрутка к секциям по якорям из меню
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -99,30 +125,60 @@ document.addEventListener('DOMContentLoaded', function() {
         const gradeSection = document.getElementById(gradeId);
         
         if (gradeSection) {
-            // По умолчанию все секции свернуты, если нет сохраненного состояния
+            // По умолчанию все секции свернуты, если нет сохраненного состояния (или если null)
             if (isCollapsed === 'true' || isCollapsed === null) {
                 gradeSection.classList.add('collapsed');
             } else {
                 gradeSection.classList.remove('collapsed');
             }
+            
+            // Синхронизируем стрелочку при загрузке
+            const arrow = document.getElementById(`arrow-${gradeId}`);
+            if (arrow) {
+                arrow.textContent = gradeSection.classList.contains('collapsed') ? '▶' : '▼';
+            }
         }
     });
 
-    // 3. Показываем уведомления о прогрессе в консоли
+    // 3. Проверяем, завершен ли текущий урок (если мы на странице урока), чтобы обновить кнопку
+    checkLessonProgressButton();
+    
+    // 4. Показываем уведомления о прогрессе в консоли
     showCompletionNotifications();
 });
+
+function checkLessonProgressButton() {
+    const path = window.location.pathname;
+    const match = path.match(/lesson(\d+)-grade(\d+)\.html/);
+    
+    if (match) {
+        const lesson = match[1];
+        const grade = match[2];
+        const progressKey = `progress_grade${grade}_lesson${lesson}`;
+        
+        if (localStorage.getItem(progressKey) === 'completed') {
+            const btn = document.querySelector('button[onclick^="completeLesson"]');
+            if (btn) {
+                btn.textContent = '✅ Урок уже завершен';
+                btn.style.background = '#4CAF50';
+                btn.disabled = true;
+            }
+        }
+    }
+}
 
 function showCompletionNotifications() {
     for (let grade = 6; grade <= 8; grade++) {
         const progress = localStorage.getItem(`total_progress_grade${grade}`);
         if (progress && parseInt(progress) > 0) {
-            console.log(`Прогресс ${grade} класс: ${progress}%`);
+            console.log(`📊 Прогресс ${grade} класс: ${progress}%`);
         }
     }
 }
 
 // ============================================
-// ФУНКЦИИ ДЛЯ СТРАНИЦЫ ИГР (game.html)
+// ФУНКЦИИ ДЛЯ ОТДЕЛЬНОЙ СТРАНИЦЫ ИГР (game.html)
+// (Оставлены на случай, если вы решите использовать отдельную страницу для игр с главной)
 // ============================================
 function initGamePage() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -130,7 +186,6 @@ function initGamePage() {
     const grade = parseInt(urlParams.get('grade')) || parseInt(localStorage.getItem('currentGameGrade')) || 6;
     const lesson = parseInt(urlParams.get('lesson')) || parseInt(localStorage.getItem('currentGameLesson')) || 1;
     
-    // Проверка на NaN
     if (isNaN(grade) || isNaN(lesson)) {
         console.error('Некорректные параметры grade или lesson');
         return;
@@ -142,7 +197,7 @@ function initGamePage() {
     const title = document.getElementById('game-title');
     if (title) {
         const titles = {
-            'crossword': ' Кроссворд',
+            'crossword': '📝 Кроссворд',
             'wordsearch': '🔤 Филворд',
             'emoji': '😊 Эмодзи-шарада',
             'rebus': '🧩 Ребусы'
@@ -150,15 +205,19 @@ function initGamePage() {
         title.textContent = `${titles[gameType] || 'Игра'} — ${grade} класс, Урок ${lesson}`;
     }
     
-    switch(gameType) {
-        case 'crossword': renderCrossword(gameType, grade, lesson); break;
-        case 'wordsearch': renderWordSearch(gameType, grade, lesson); break;
-        case 'emoji': renderEmojiGame(gameType, grade, lesson); break;
-        case 'rebus': renderRebus(gameType, grade, lesson); break;
-        default: gameContainer.innerHTML = '<p>Игра не найдена. Вернитесь к уроку.</p>';
+    // Вызываем функции из games.js для рендеринга на отдельной странице
+    if (typeof renderCrossword === 'function') {
+        switch(gameType) {
+            case 'crossword': renderCrossword(gameType, grade, lesson); break;
+            case 'wordsearch': renderWordSearch(gameType, grade, lesson); break;
+            case 'emoji': renderEmojiGame(gameType, grade, lesson); break;
+            case 'rebus': renderRebus(gameType, grade, lesson); break;
+            default: gameContainer.innerHTML = '<p>Игра не найдена. Вернитесь к уроку.</p>';
+        }
     }
 }
 
+// Запускаем инициализацию игр только если мы на странице game.html
 if (window.location.pathname.includes('game.html')) {
     document.addEventListener('DOMContentLoaded', initGamePage);
 }
