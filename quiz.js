@@ -63,7 +63,7 @@ const quizData = {
         ]
     },
     
-    // Урок 3: Музыкальный народный календарь (НОВЫЙ!)
+    // Урок 3: Музыкальный народный календарь
     'grade7_lesson3': {
         questions: [
             { id: 731, question: "Что такое календарные обрядовые песни?", options: ["Песни, связанные с циклом земледельческих праздников", "Только песни о любви", "Песни, которые пели только зимой", "Современные эстрадные песни"], correct: 0, explanation: "Календарные обрядовые песни связаны с циклом земледельческих праздников и сменой времён года." },
@@ -122,7 +122,7 @@ const quizData = {
             },
             {
                 id: 824,
-                question: "Почему саундтреки к видеоиграм (например, <em>The Witcher</em> [зэ ви́чер] или <em>Skyrim</em> [скайрим]) сегодня исполняют симфонические оркестры?",
+                question: "Почему саундтреки к видеоиграм (например, <em>The Witcher</em> или <em>Skyrim</em>) сегодня исполняют симфонические оркестры?",
                 options: [
                     "Потому что это модно",
                     "Потому что игровая музыка имеет сложную симфоническую структуру, достойную концертного зала",
@@ -191,12 +191,12 @@ function loadQuiz(grade, lesson) {
     const quizKey = `grade${grade}_lesson${lesson}`;
     const quiz = quizData[quizKey];
     
-    // Поддержка обоих ID контейнеров
+    // Поддержка обоих ID контейнеров для максимальной совместимости
     const quizContainer = document.getElementById('quiz-container') || document.getElementById('quiz-content');
     if (!quizContainer) return;
 
     if (!quiz) {
-        quizContainer.innerHTML = '<p style="text-align:center; padding:20px; background:#fff3cd; border-radius:10px;">🚧 Опрос для этого урока скоро появится! Следите за обновлениями.</p>';
+        quizContainer.innerHTML = '<p style="text-align:center; padding:20px; background:#fff3cd; border-radius:10px; color:#856404;">🚧 Опрос для этого урока скоро появится! Следите за обновлениями.</p>';
         return;
     }
     
@@ -214,7 +214,7 @@ function loadQuiz(grade, lesson) {
                     </div>
                 `).join('')}
             </div>
-            <div id="exp${q.id}" class="explanation" style="display:none; margin-top:10px; padding:10px; background:#f0f0f0; border-radius:5px;">
+            <div id="exp${q.id}" class="explanation" style="display:none; margin-top:10px; padding:10px; background:#f0f0f0; border-radius:5px; border-left: 4px solid #667eea;">
                 <strong>💡 Объяснение:</strong> ${q.explanation}
             </div>
         `;
@@ -223,16 +223,19 @@ function loadQuiz(grade, lesson) {
 }
 
 // ============================================
-// ПРОВЕРКА ОТВЕТА (уникальное имя!)
+// ПРОВЕРКА ОТВЕТА (Улучшенная защита от повторных кликов)
 // ============================================
 function checkQuizAnswer(questionId, selected, correct, explanationId) {
     const options = document.querySelectorAll(`#q${questionId} .quiz-option`);
     const explanation = document.getElementById(explanationId);
     
+    // Надежная проверка: если первый элемент уже заблокирован, выходим
     if (options[0].style.pointerEvents === 'none') return;
     
     options.forEach((opt, index) => {
-        opt.style.pointerEvents = 'none';
+        opt.style.pointerEvents = 'none'; // Блокируем клики
+        opt.style.cursor = 'default';     // Меняем курсор
+        
         if (index === correct) {
             opt.classList.add('correct');
         } else if (index === selected && index !== correct) {
@@ -242,6 +245,14 @@ function checkQuizAnswer(questionId, selected, correct, explanationId) {
     
     if (explanation) {
         explanation.style.display = 'block';
+        // Добавляем класс для красивой стилизации через CSS (success/error)
+        if (selected === correct) {
+            explanation.style.borderLeftColor = '#4CAF50';
+            explanation.style.background = '#e8f5e9';
+        } else {
+            explanation.style.borderLeftColor = '#f44336';
+            explanation.style.background = '#ffebee';
+        }
     }
     
     saveQuizResult(questionId, selected === correct);
@@ -257,7 +268,8 @@ function saveQuizResult(questionId, isCorrect) {
 }
 
 // ============================================
-// НОВАЯ СИСТЕМА ТЕСТОВ (для уроков с массивом вопросов)
+// АЛЬТЕРНАТИВНАЯ СИСТЕМА ТЕСТОВ (Пошаговая)
+// Используется, если нужно передать массив вопросов напрямую, а не из базы
 // ============================================
 function initQuiz(questions) {
     const container = document.getElementById('quiz-container') || document.getElementById('quiz-content');
@@ -304,6 +316,7 @@ function initQuiz(questions) {
 
         options.forEach((btn, index) => {
             btn.disabled = true;
+            btn.style.cursor = 'default';
             if (index === q.correct) {
                 btn.classList.add('correct');
             } else if (index === selectedIndex && index !== q.correct) {
@@ -351,8 +364,8 @@ function initQuiz(questions) {
                     <p>Процент: ${percentage}%</p>
                     <p>Оценка: ${grade}</p>
                 </div>
-                <p class="result-message success">${message}</p>
-                <button class="btn-submit" onclick="location.reload()">Пройти снова</button>
+                <p class="result-message success" style="margin-top:15px;">${message}</p>
+                <button class="btn-submit" onclick="location.reload()" style="margin-top:20px;">Пройти снова</button>
             </div>
         `;
     }
@@ -361,30 +374,32 @@ function initQuiz(questions) {
 }
 
 // ============================================
-// ИНИЦИАЛИЗАЦИЯ ОПРОСА ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
+// АВТОМАТИЧЕСКАЯ ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     const quizContainer = document.getElementById('quiz-container') || document.getElementById('quiz-content');
-    if (!quizContainer) return;
+    if (!quizContainer) return; // Если на странице нет блока для теста, ничего не делаем
 
     const path = window.location.pathname;
-    let grade = 6;
-    if (path.includes('grade7')) grade = 7;
-    if (path.includes('grade8')) grade = 8;
+    let grade = 6; // По умолчанию
+    
+    // Определяем класс по URL
+    if (path.includes('grade7') || path.includes('-grade7.')) grade = 7;
+    if (path.includes('grade8') || path.includes('-grade8.')) grade = 8;
 
     const urlParams = new URLSearchParams(window.location.search);
     let lesson = urlParams.get('lesson');
     
+    // Если lesson не передан в URL, извлекаем его из имени файла (например, lesson3-grade7.html -> 3)
     if (!lesson) {
         const match = path.match(/lesson(\d+)-grade\d+\.html/);
         if (match) {
             lesson = match[1];
-        } else if (path.includes('lesson-grade')) {
-            lesson = 1;
         } else {
-            lesson = 1;
+            lesson = 1; // Fallback
         }
     }
 
+    // Загружаем тест
     loadQuiz(grade, parseInt(lesson));
 });
