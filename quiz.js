@@ -55,15 +55,33 @@ const quizData = {
             { id: 721, question: "Какова главная задача колыбельной песни?", options: ["Развлечь гостей", "Создать ощущение безопасности, тепла и усыпить ребенка", "Научить танцевать", "Рассказать исторические события"], correct: 1, explanation: "Колыбельная призвана успокоить ребенка и создать защитное пространство." },
             { id: 722, question: "Какая музыкальная особенность характерна для колыбельных?", options: ["Быстрый темп", "Плавная, покачивающаяся мелодия с узким диапазоном", "Громкое фортепиано", "Сложный ритм"], correct: 1, explanation: "Мелодия колыбельной имитирует ритм укачивания." },
             { id: 723, question: "Для чего дети используют считалки?", options: ["Выучить таблицу умножения", "Справедливо распределить роли в игре", "Убаюкать брата", "Поздравить с днем рождения"], correct: 1, explanation: "Считалки — это ритмичные рифмовки для жеребьевки." },
-            { id: 724, question: "Какую функцию выполняют дразнилки в детском коллективе?", options: ["Только обижают", "В игровой форме указывают на недостатки поведения, помогая социализации", "Не несят функции", "Используются на сцене"], correct: 1, explanation: "Дразнилки помогают детям усваивать социальные нормы." },
+            { id: 724, question: "Какую функцию выполняют дразнилки в детском коллективе?", options: ["Только обижают", "В игровой форме указывают на недостатки поведения, помогая социализации", "Не несут функции", "Используются на сцене"], correct: 1, explanation: "Дразнилки помогают детям усваивать социальные нормы." },
             { id: 725, question: "Что такое потешки и пестушки?", options: ["Сложные хоровые произведения", "Короткие песенки-приговорки, сопровождающие первые движения и игры ребенка", "Инструментальные пьесы", "Песни для взрослых"], correct: 1, explanation: "Потешки развивают моторику и речь малыша в игровой форме." },
             { id: 726, question: "Кто традиционно был главным хранителем семейного фольклора?", options: ["Школьные учителя", "Бабушки и матери", "Профессиональные музыканты", "Дикторы радио"], correct: 1, explanation: "Семейный фольклор передавался от старших женщин в семье к детям." },
             { id: 727, question: "Какой великий русский композитор написал «Колыбельную песню» в «Детском альбоме»?", options: ["М.П. Мусоргский", "П.И. Чайковский", "Н.А. Римский-Корсаков", "Д.Д. Шостакович"], correct: 1, explanation: "П.И. Чайковский включил прекрасную «Колыбельную песню» в свой «Детский альбом»." },
             { id: 728, question: "Почему семейный фольклор важен для современного ребенка?", options: ["Помогает выучить языки", "Формирует базовое доверие к миру, развивает речь и эмоциональный интеллект", "Заменяет мультфильмы", "Не важен"], correct: 1, explanation: "Семейный фольклор закладывает фундамент эмоционального здоровья." }
         ]
-    }    , // Запятая, отделяющая этот блок от предыдущего
+    },
     
-    // 8 КЛАСС - УРОК 2: Исследовательский проект
+    // Урок 3: Музыкальный народный календарь (НОВЫЙ!)
+    'grade7_lesson3': {
+        questions: [
+            { id: 731, question: "Что такое календарные обрядовые песни?", options: ["Песни, связанные с циклом земледельческих праздников", "Только песни о любви", "Песни, которые пели только зимой", "Современные эстрадные песни"], correct: 0, explanation: "Календарные обрядовые песни связаны с циклом земледельческих праздников и сменой времён года." },
+            { id: 732, question: "Как называются зимние обрядовые песни?", options: ["Веснянки", "Колядки", "Жнивные", "Купальские"], correct: 1, explanation: "Зимние обрядовые песни называются колядками. Их пели во время Святок." },
+            { id: 733, question: "В какой период отмечаются Святки?", options: ["От Пасхи до Троицы", "От Рождества до Крещения", "От Масленицы до Пасхи", "От Ивана Купалы до Спаса"], correct: 1, explanation: "Святки — период от Рождества (7 января) до Крещения (19 января)." },
+            { id: 734, question: "Что такое веснянки?", options: ["Зимние песни", "Весенние песни встречи весны", "Летние хороводные песни", "Осенние жнивные песни"], correct: 1, explanation: "Веснянки — весенние обрядовые песни, которыми «закликали» весну." },
+            { id: 735, question: "Какой праздник связан с летним солнцеворотом?", options: ["Масленица", "Иван Купала", "Коляда", "Обжинки"], correct: 1, explanation: "Иван Купала (7 июля) связан с летним солнцеворотом — самой короткой ночью в году." },
+            { id: 736, question: "Что такое заклички?", options: ["Песни, которыми «заклинали» силы природы", "Только свадебные песни", "Песни для танцев", "Колыбельные песни"], correct: 0, explanation: "Заклички — короткие песни-обращения к силам природы (солнцу, дождю, ветру)." },
+            { id: 737, question: "Когда отмечаются обжинки?", options: ["В начале сева", "В середине лета", "После окончания уборки урожая", "Зимой"], correct: 2, explanation: "Обжинки — праздник окончания жатвы (уборки урожая)." },
+            { id: 738, question: "Какой композитор написал оперу «Снегурочка» с весенними обрядами?", options: ["П.И. Чайковский", "Н.А. Римский-Корсаков", "М.И. Глинка", "С.В. Рахманинов"], correct: 1, explanation: "Н.А. Римский-Корсаков написал оперу «Снегурочка», в которой представлены весенние обряды." },
+            { id: 739, question: "Какой характер имеют масленичные песни?", options: ["Протяжный и грустный", "Задорный и плясовой", "Торжественный и медленный", "Лирический и тихий"], correct: 1, explanation: "Масленичные песни отличаются задорным, плясовым характером." },
+            { id: 740, question: "Что НЕ является общей чертой календарных песен?", options: ["Обрядовый характер", "Коллективное исполнение", "Сольное исполнение с оркестром", "Связь с природой"], correct: 2, explanation: "Календарные песни — это народное творчество, они исполнялись коллективно, без оркестра." }
+        ]
+    },
+    
+    // ===== 8 КЛАСС =====
+    
+    // Урок 2: Исследовательский проект
     'grade8_lesson2': {
         questions: [
             {
@@ -167,13 +185,14 @@ const quizData = {
 };
 
 // ============================================
-// ФУНКЦИЯ ЗАГРУЗКИ ОПРОСА
+// УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ЗАГРУЗКИ ОПРОСА
 // ============================================
 function loadQuiz(grade, lesson) {
     const quizKey = `grade${grade}_lesson${lesson}`;
     const quiz = quizData[quizKey];
     
-    const quizContainer = document.getElementById('quiz-content');
+    // Поддержка обоих ID контейнеров
+    const quizContainer = document.getElementById('quiz-container') || document.getElementById('quiz-content');
     if (!quizContainer) return;
 
     if (!quiz) {
@@ -190,7 +209,7 @@ function loadQuiz(grade, lesson) {
             <h3>Вопрос ${index + 1}: ${q.question}</h3>
             <div class="quiz-options" id="q${q.id}">
                 ${q.options.map((opt, i) => `
-                    <div class="quiz-option" onclick="checkAnswer(${q.id}, ${i}, ${q.correct}, 'exp${q.id}')">
+                    <div class="quiz-option" onclick="checkQuizAnswer(${q.id}, ${i}, ${q.correct}, 'exp${q.id}')">
                         ${opt}
                     </div>
                 `).join('')}
@@ -204,9 +223,9 @@ function loadQuiz(grade, lesson) {
 }
 
 // ============================================
-// ПРОВЕРКА ОТВЕТА
+// ПРОВЕРКА ОТВЕТА (уникальное имя!)
 // ============================================
-function checkAnswer(questionId, selected, correct, explanationId) {
+function checkQuizAnswer(questionId, selected, correct, explanationId) {
     const options = document.querySelectorAll(`#q${questionId} .quiz-option`);
     const explanation = document.getElementById(explanationId);
     
@@ -238,10 +257,114 @@ function saveQuizResult(questionId, isCorrect) {
 }
 
 // ============================================
+// НОВАЯ СИСТЕМА ТЕСТОВ (для уроков с массивом вопросов)
+// ============================================
+function initQuiz(questions) {
+    const container = document.getElementById('quiz-container') || document.getElementById('quiz-content');
+    if (!container || !questions || questions.length === 0) return;
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function showQuestion() {
+        if (currentQuestion >= questions.length) {
+            showResults();
+            return;
+        }
+
+        const q = questions[currentQuestion];
+        let html = `
+            <div class="quiz-question">
+                <h4>Вопрос ${currentQuestion + 1} из ${questions.length}</h4>
+                <p class="question-text">${q.question}</p>
+                <div class="quiz-options">
+        `;
+
+        q.options.forEach((option, index) => {
+            html += `<button class="quiz-option" onclick="handleQuizAnswer(${index})">${option}</button>`;
+        });
+
+        html += `
+                </div>
+                <div id="explanation" style="display:none;"></div>
+                <button id="nextBtn" class="btn-next" style="display:none;" onclick="nextQuizQuestion()">
+                    ${currentQuestion === questions.length - 1 ? 'Завершить тест' : 'Следующий вопрос'}
+                </button>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    window.handleQuizAnswer = function(selectedIndex) {
+        const q = questions[currentQuestion];
+        const options = document.querySelectorAll('.quiz-option');
+        const explanation = document.getElementById('explanation');
+        const nextBtn = document.getElementById('nextBtn');
+
+        options.forEach((btn, index) => {
+            btn.disabled = true;
+            if (index === q.correct) {
+                btn.classList.add('correct');
+            } else if (index === selectedIndex && index !== q.correct) {
+                btn.classList.add('incorrect');
+            }
+        });
+
+        if (selectedIndex === q.correct) {
+            score++;
+            explanation.innerHTML = `<div class="result-message success">✓ Правильно! ${q.explanation}</div>`;
+        } else {
+            explanation.innerHTML = `<div class="result-message error">✗ Неправильно. ${q.explanation}</div>`;
+        }
+
+        explanation.style.display = 'block';
+        nextBtn.style.display = 'inline-block';
+    };
+
+    window.nextQuizQuestion = function() {
+        currentQuestion++;
+        showQuestion();
+    };
+
+    function showResults() {
+        const percentage = Math.round((score / questions.length) * 100);
+        let message = '';
+        let grade = '';
+
+        if (percentage >= 80) {
+            message = 'Отлично! Вы прекрасно усвоили материал!';
+            grade = '5';
+        } else if (percentage >= 60) {
+            message = 'Хорошо! Но есть куда стремиться.';
+            grade = '4';
+        } else {
+            message = 'Стоит повторить тему.';
+            grade = '3';
+        }
+
+        container.innerHTML = `
+            <div class="quiz-results">
+                <h3>Результаты теста</h3>
+                <div class="score-display">
+                    <p>Правильных ответов: ${score} из ${questions.length}</p>
+                    <p>Процент: ${percentage}%</p>
+                    <p>Оценка: ${grade}</p>
+                </div>
+                <p class="result-message success">${message}</p>
+                <button class="btn-submit" onclick="location.reload()">Пройти снова</button>
+            </div>
+        `;
+    }
+
+    showQuestion();
+}
+
+// ============================================
 // ИНИЦИАЛИЗАЦИЯ ОПРОСА ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    const quizContainer = document.getElementById('quiz-content');
+    const quizContainer = document.getElementById('quiz-container') || document.getElementById('quiz-content');
     if (!quizContainer) return;
 
     const path = window.location.pathname;
