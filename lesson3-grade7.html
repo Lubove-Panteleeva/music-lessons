@@ -5,294 +5,257 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 3: Музыкальный народный календарь - 7 класс</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Дополнительные стили для красивых ссылок-источников (как в примере) -->
+    <style>
+        .sources-container {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .sources-container p {
+            margin: 18px 0;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        .source-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed #667eea;
+            margin: 0 6px;
+            transition: all 0.2s ease;
+        }
+        .source-link:hover {
+            color: #764ba2;
+            border-bottom-style: solid;
+            transform: translateY(-1px);
+        }
+        .separator {
+            color: #999;
+            margin: 0 2px;
+        }
+        .info-box {
+            background: linear-gradient(135deg, #fff5e6, #ffe8cc);
+            border-left: 4px solid #fdcb6e;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        .folk-text {
+            font-style: italic;
+            line-height: 1.8;
+            color: #2d3436;
+        }
+    </style>
 </head>
 <body>
-    <header class="main-header">
+    <div class="lesson-page">
         <div class="container">
-            <div class="logo">
-                <span class="music-note">♪</span>
+            <div class="lesson-header">
+                <a href="index.html" class="back-btn">← Назад к урокам</a>
                 <h1>Урок 3: Музыкальный народный календарь</h1>
+                <p class="lesson-subtitle">Календарные обрядовые песни русского народа</p>
+                <div class="lesson-meta">
+                    <div class="meta-item">⏱️ 30 минут</div>
+                    <div class="meta-item">📚 7 класс</div>
+                    <div class="meta-item">🎼 Календарные обряды</div>
+                </div>
             </div>
-            <nav>
-                <a href="index.html" class="back-btn">← К списку уроков</a>
-            </nav>
+
+            <div class="lesson-content">
+                <!-- ВВЕДЕНИЕ -->
+                <div class="lesson-section">
+                    <h2>📖 Введение</h2>
+                    <p>
+                        Представьте себе жизнь русского крестьянина несколько столетий назад. У него 
+                        не было привычного нам календаря с выходными. Но год всё равно делился на 
+                        важные периоды — время сева, сбора урожая, зимнего отдыха. Каждый такой 
+                        период отмечался особыми обрядами, а обряды невозможно было представить без песен.
+                    </p>
+                    <p>
+                        <strong>Народный календарь</strong> — это система земледельческих праздников 
+                        и обрядов, связанных с циклом сельскохозяйственных работ и сменой времён года. 
+                        Песни, сопровождавшие эти обряды, называются <strong>календарными обрядовыми</strong>.
+                    </p>
+                </div>
+
+                <!-- ОСНОВНАЯ ЧАСТЬ 1: ЗИМА -->
+                <div class="lesson-section">
+                    <h2>❄️ Зимний цикл: Святки и колядки</h2>
+                    <p>
+                        <strong>Святки</strong> (святые вечера) — период от Рождества (7 января) до 
+                        Крещения (19 января). Это время веселья, гаданий и хождения по дворам с песнями. 
+                        Главные песни этого периода — <strong>колядки</strong>.
+                    </p>
+                    <p>
+                        Колядовщики ходили от дома к дому, пели специальные песни, в которых желали 
+                        хозяевам здоровья, богатства и хорошего урожая. Взамен они получали угощения: 
+                        пироги, монеты, яблоки.
+                    </p>
+                    <div class="info-box">
+                        <h4>📜 Пример колядки (Архангельская губерния)</h4>
+                        <p class="folk-text">
+                            <em>Коляда, коляда,<br>
+                            Приезжай к нам сюда!<br>
+                            Дай тебе, хозяин,<br>
+                            Бог здоровья нажить,<br>
+                            Со здоровьичком прожить.</em>
+                        </p>
+                    </div>
+
+                    <h3>Масленица — проводы зимы</h3>
+                    <p>
+                        <strong>Масленица</strong> отмечается в неделю перед Великим постом и символизирует 
+                        проводы зимы. Масленичные песни отличались <strong>задорным, плясовым характером</strong>. 
+                        Они сопровождались хороводами, играми и катанием с горок.
+                    </p>
+                </div>
+
+                <!-- ОСНОВНАЯ ЧАСТЬ 2: ВЕСНА И ЛЕТО -->
+                <div class="lesson-section">
+                    <h2>🌸 Весенний и летний циклы</h2>
+                    
+                    <h3>Веснянки и заклички</h3>
+                    <p>
+                        <strong>Веснянки</strong> — весенние обрядовые песни, которые пели в марте-апреле. 
+                        Их главная задача — <strong>«закликать» весну</strong>, ускорить её приход. 
+                        Девушки выходили на пригорки, высоко поднимали руки к небу и пели, обращаясь к весне.
+                    </p>
+                    <p>
+                        <strong>Заклички</strong> — короткие песни-обращения к силам природы: солнцу, 
+                        дождю, ветру. Они отличались краткостью и повторяющимися формулами.
+                    </p>
+
+                    <h3>Иван Купала и жнивные песни</h3>
+                    <p>
+                        <strong>Иван Купала</strong> (7 июля) — праздник летнего солнцеворота, самой 
+                        короткой ночи в году. В эту ночь зажигали костры, плели венки и пускали их по воде. 
+                        Купальские песни сочетали лирические, хороводные и обрядовые элементы.
+                    </p>
+                    <p>
+                        <strong>Жнивные песни</strong> помогали держать ритм во время тяжелой коллективной 
+                        работы по уборке хлеба. А по её окончании устраивали <strong>обжинки</strong> — 
+                        праздник с особыми песнями и плетением венка из последних колосьев.
+                    </p>
+                </div>
+
+                <!-- ИСТОЧНИКИ ДЛЯ ПРОСЛУШИВАНИЯ -->
+                <div class="lesson-section">
+                    <h2>🎧 Источники для прослушивания</h2>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 0.95em;">
+                        💡 <strong>Совет:</strong> Нажмите на название, чтобы открыть материал в новой вкладке.
+                    </p>
+                    
+                    <div class="sources-container">
+                        <p>
+                            <strong>Пример 1: Зимняя колядка</strong> (Традиционное исполнение): 
+                            <a href="https://vkvideo.ru/video-23217281_456239276" target="_blank" class="source-link">Колядка "иноградье" - запись на инструменте КОЛЁСНАЯ ЛИРА</a>
+                            <span class="separator">•</span>
+                            <a href="https://commons.wikimedia.org/wiki/File:Kolyadka.ogg" target="_blank" class="source-link">Аудио: Традиционная русская колядка (Wikimedia Commons)</a>
+                        </p>
+
+                        <p>
+                            <strong>Пример 2: Масленичная песня</strong> (Плясовой характер): 
+                            <a href="https://vkvideo.ru/video-518518997_456239026" target="_blank" class="source-link">Как люди в современном мире соблюдают традиции под колядку (ансамбль "Живы традиции Руси")</a>
+                            <span class="separator">•</span>
+                            <a href="https://archive.org/details/RussianFolkSongs" target="_blank" class="source-link">Аудио: Масленичная плясовая песня (Archive.org)</a>
+                        </p>
+
+                        <p>
+                            <strong>Пример 3: Веснянка и закличка</strong>: 
+                            <a href="https://vkvideo.ru/video-56931698_171305686" target="_blank" class="source-link">Р.н.п. "Во поле берёзка стояла" (девечий хоровод, ГАХА "Берёзка")</a>
+                            <span class="separator">•</span>
+                            <a href="https://commons.wikimedia.org/wiki/File:Vesnyanka.ogg" target="_blank" class="source-link">Аудио: Весенняя закличка (Wikimedia Commons)</a>
+                        </p>
+
+                        <p>
+                            <strong>Пример 4: Купальские и жнивные песни</strong>: 
+                            <a href="https://vkvideo.ru/video-74227904_456240349" target="_blank" class="source-link">Репортаж: Этнодеревня "Пожарище", Вологодская область (обрядовые песни)</a>
+                            <span class="separator">•</span>
+                            <a href="https://commons.wikimedia.org/wiki/File:Kupalska.ogg" target="_blank" class="source-link">Аудио: Купальская хороводная песня (Wikimedia Commons)</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ЗАКЛЮЧЕНИЕ -->
+                <div class="lesson-section">
+                    <h2>✨ Заключение</h2>
+                    <p>
+                        Музыкальный народный календарь — это уникальное явление русской культуры. 
+                        Через календарные песни мы можем понять, как жили наши предки, что они 
+                        ценили, о чём мечтали и как взаимодействовали с природой.
+                    </p>
+                    <p>
+                        Эти песни — не просто музыка, а настоящая энциклопедия народной жизни, 
+                        которая благодаря фольклорным ансамблям и исследователям продолжает жить 
+                        и звучать в наши дни.
+                    </p>
+                </div>
+
+                <!-- ОПРОС -->
+                <div class="quiz-container" id="quiz">
+                    <h2>📝 Проверьте свои знания</h2>
+                    <div id="quiz-content">
+                        <!-- Вопросы будут загружены из quiz.js -->
+                    </div>
+                </div>
+
+                <!-- ИГРОВЫЕ ЗАДАНИЯ -->
+                <div class="games-section" style="margin-top: 40px;">
+                    <h2>🎮 Игровые задания</h2>
+                    <p style="margin-bottom: 20px;">Закрепите материал урока, разгадав кроссворд и выполнив другие задания!</p>
+                    
+                    <div class="games-grid">
+                        <div class="game-card">
+                            <h3>📝 Кроссворд «Народный календарь»</h3>
+                            <p>Вспомните названия обрядов и праздников</p>
+                            <button onclick="openGame('crossword', 7, 3)">Играть</button>
+                        </div>
+                        <div class="game-card">
+                            <h3>🔤 Филворд «Слова календаря»</h3>
+                            <p>Найдите в сетке слова: колядки, веснянки, купала</p>
+                            <button onclick="openGame('wordsearch', 7, 3)">Играть</button>
+                        </div>
+                        <div class="game-card">
+                            <h3>😊 Эмодзи-шарада</h3>
+                            <p>Угадайте песни по эмодзи: 🎄🎶🏠 (Колядки)</p>
+                            <button onclick="openGame('emoji', 7, 3)">Играть</button>
+                        </div>
+                        <div class="game-card">
+                            <h3>🧩 Ребусы</h3>
+                            <p>Разгадайте названия календарных праздников</p>
+                            <button onclick="openGame('rebus', 7, 3)">Играть</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+                <div class="lesson-section" style="background: #f5f7fa; padding: 30px; border-radius: 10px; margin-top: 40px;">
+                    <h2>📚 Домашнее задание</h2>
+                    <ol>
+                        <li>Перейдите по ссылкам и прослушайте/посмотрите все музыкальные примеры урока.</li>
+                        <li>Узнайте у старших членов семьи, какие календарные праздники (Масленица, Иван Купала) они помнят и как их отмечали.</li>
+                        <li>Найдите и выучите текст одной веснянки или заклички.</li>
+                        <li>Пройдите опрос и выполните игровые задания на этой странице.</li>
+                    </ol>
+                </div>
+
+                <!-- КНОПКА ЗАВЕРШЕНИЯ -->
+                <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+                    <button class="start-btn" onclick="completeLesson(7, 3)" style="max-width: 400px; font-size: 1.2em;">
+                        ✅ Я завершил урок
+                    </button>
+                </div>
+            </div>
         </div>
-    </header>
-
-    <main class="lesson-container">
-        <div class="lesson-header">
-            <h1>Музыкальный народный календарь</h1>
-            <p>Календарные обрядовые песни русского народа</p>
-            <div class="lesson-meta-header">
-                <span>⏱ 30 минут</span>
-                <span> 7 класс</span>
-                <span>🎵 Урок 3</span>
-            </div>
-        </div>
-
-        <article class="lesson-content">
-            <h2>Введение. Что такое народный календарь?</h2>
-            <p>
-                Представьте себе жизнь русского крестьянина несколько столетий назад. У него 
-                не было привычного нам календаря с выходными и праздниками. Но год всё равно 
-                делился на важные периоды — время сева, время сбора урожая, время зимнего 
-                отдыха. Каждый такой период отмечался особыми обрядами, а обряды невозможно 
-                было представить без песен.
-            </p>
-            <p>
-                <strong>Народный календарь</strong> — это система земледельческих праздников 
-                и обрядов, связанных с циклом сельскохозяйственных работ и сменой времён года. 
-                Каждый праздник сопровождался особыми песнями, которые назывались 
-                <strong>календарными обрядовыми</strong>.
-            </p>
-
-            <img src="https://images.unsplash.com/photo-1528150187455-bdbf701fd4a6?w=800" 
-                 alt="Русская деревня зимой" class="lesson-image">
-            <p class="image-caption">Традиционная русская деревня — центр народной культуры</p>
-
-            <h2>Годовой круг: четыре времени года</h2>
-            <p>
-                Народный календарь делится на четыре больших цикла:
-            </p>
-            <ol>
-                <li><strong>Зимний цикл</strong> — Святки, колядки, масленичные песни</li>
-                <li><strong>Весенний цикл</strong> — веснянки, заклички</li>
-                <li><strong>Летний цикл</strong> — купальские, русальные, жнивные песни</li>
-                <li><strong>Осенний цикл</strong> — обжинки, осенние лирические песни</li>
-            </ol>
-
-            <h2>Зимний цикл: Святки и колядки</h2>
-            
-            <h3>Святки — от Рождества до Крещения</h3>
-            <p>
-                <strong>Святки</strong> (святые вечера) — период от Рождества (7 января) до 
-                Крещения (19 января). Это время веселья, гаданий, хождения по дворам с песнями. 
-                Главные песни этого периода — <strong>колядки</strong>.
-            </p>
-
-            <div class="info-box">
-                <h4>📜 Пример колядки</h4>
-                <p class="folk-text">
-                    <em>Коляда, коляда,<br>
-                    Приезжай к нам сюда!<br>
-                    Дай тебе, хозяин,<br>
-                    Бог здоровья нажить,<br>
-                    Со здоровьичком прожить.</em>
-                </p>
-            </div>
-
-            <div class="audio-section">
-                <h3> Пример для прослушивания: Русская колядка</h3>
-                <audio controls class="audio-player">
-                    <source src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Kolyadka.ogg" type="audio/ogg">
-                    Ваш браузер не поддерживает аудио элемент.
-                </audio>
-                <p class="source-info">Источник: Wikimedia Commons, общественное достояние</p>
-            </div>
-
-            <h2>Масленица — проводы зимы</h2>
-            <p>
-                <strong>Масленица</strong> — один из самых весёлых праздников русского народа. 
-                Она отмечается в неделю перед Великим постом (февраль-март) и символизирует 
-                проводы зимы и встречу весны.
-            </p>
-
-            <div class="audio-section">
-                <h3>🎵 Масленичная песня</h3>
-                <audio controls class="audio-player">
-                    <source src="https://archive.org/download/RussianFolkSongs/Maslenitsa.ogg" type="audio/ogg">
-                    Ваш браузер не поддерживает аудио элемент.
-                </audio>
-                <p class="source-info">Источник: Archive.org</p>
-            </div>
-
-            <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=800" 
-                 alt="Масленица" class="lesson-image">
-            <p class="image-caption">Масленица — праздник проводов зимы</p>
-
-            <h2>Весенний цикл: веснянки и заклички</h2>
-            
-            <h3>Веснянки — песни встречи весны</h3>
-            <p>
-                <strong>Веснянки</strong> — весенние обрядовые песни, которые пели в марте-апреле, 
-                когда природа пробуждалась от зимнего сна. Их главная задача — <strong>«закликать» 
-                весну</strong>, ускорить её приход.
-            </p>
-
-            <div class="info-box">
-                <h4>📜 Веснянка</h4>
-                <p class="folk-text">
-                    <em>Весна, весна красная,<br>
-                    Приди, весна, с радостью,<br>
-                    С великою милостью!<br>
-                    Со льном высоким,<br>
-                    С хлебами обильными!</em>
-                </p>
-            </div>
-
-            <div class="audio-section">
-                <h3>🎵 Веснянка</h3>
-                <audio controls class="audio-player">
-                    <source src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Vesnyanka.ogg" type="audio/ogg">
-                    Ваш браузер не поддерживает аудио элемент.
-                </audio>
-                <p class="source-info">Источник: Wikimedia Commons</p>
-            </div>
-
-            <h2>Летний цикл: Иван Купала и жнивные песни</h2>
-            
-            <h3>Купальские песни</h3>
-            <p>
-                <strong>Иван Купала</strong> (7 июля) — один из самых красивых и мистических 
-                праздников славян. Он связан с летним солнцеворотом.
-            </p>
-
-            <div class="audio-section">
-                <h3>🎵 Купальская песня</h3>
-                <audio controls class="audio-player">
-                    <source src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Kupalska.ogg" type="audio/ogg">
-                    Ваш браузер не поддерживает аудио элемент.
-                </audio>
-                <p class="source-info">Источник: Wikimedia Commons</p>
-            </div>
-
-            <h2>Заключение</h2>
-            <p>
-                Музыкальный народный календарь — это уникальное явление русской культуры. 
-                Через календарные песни мы можем понять, как жили наши предки, что они 
-                ценили, о чём мечтали.
-            </p>
-
-            <h2>Ключевые термины</h2>
-            <div class="terms-box">
-                <ul>
-                    <li><strong>Колядки</strong> — зимние обрядовые песни</li>
-                    <li><strong>Веснянки</strong> — весенние песни встречи весны</li>
-                    <li><strong>Заклички</strong> — обращения к силам природы</li>
-                    <li><strong>Купальские песни</strong> — песни праздника Ивана Купалы</li>
-                    <li><strong>Жнивные песни</strong> — песни уборки урожая</li>
-                    <li><strong>Масленичные песни</strong> — песни проводов зимы</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ТЕСТ -->
-        <section class="quiz-section">
-            <h2>📝 Проверь свои знания</h2>
-            <div id="quiz-container"></div>
-        </section>
-
-        <!-- ИГРЫ -->
-        <section class="game-section">
-            <h2>🎮 Игровые задания</h2>
-            
-            <div class="game-block">
-                <h3>📝 Кроссворд</h3>
-                <div id="crossword-container"></div>
-            </div>
-
-            <div class="game-block">
-                <h3>🔍 Филворд</h3>
-                <div id="wordsearch-container"></div>
-            </div>
-
-            <div class="game-block">
-                <h3>😎 Эмодзи-шарада</h3>
-                <div id="emoji-container"></div>
-            </div>
-        </section>
-
-        <div class="lesson-navigation">
-            <a href="lesson2-grade7.html" class="btn-prev">← Предыдущий урок</a>
-            <a href="lesson4-grade7.html" class="btn-next">Следующий урок →</a>
-        </div>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <p>Урок 3 из 37 | 7 класс | Музыкальный народный календарь</p>
-        </div>
-    </footer>
+    </div>
 
     <script src="script.js"></script>
     <script src="quiz.js"></script>
     <script src="games.js"></script>
-    <script>
-        // Данные для урока 3
-        const lesson3Data = {
-            quiz: [
-                {
-                    question: "Что такое календарные обрядовые песни?",
-                    options: [
-                        "Песни, связанные с циклом земледельческих праздников",
-                        "Только песни о любви",
-                        "Песни, которые пели только зимой",
-                        "Современные эстрадные песни"
-                    ],
-                    correct: 0,
-                    explanation: "Календарные обрядовые песни связаны с циклом земледельческих праздников и сменой времён года."
-                },
-                {
-                    question: "Как называются зимние обрядовые песни?",
-                    options: ["Веснянки", "Колядки", "Жнивные", "Купальские"],
-                    correct: 1,
-                    explanation: "Зимние обрядовые песни называются колядками."
-                },
-                {
-                    question: "В какой период отмечаются Святки?",
-                    options: [
-                        "От Пасхи до Троицы",
-                        "От Рождества до Крещения",
-                        "От Масленицы до Пасхи",
-                        "От Ивана Купалы до Спаса"
-                    ],
-                    correct: 1,
-                    explanation: "Святки — период от Рождества (7 января) до Крещения (19 января)."
-                },
-                {
-                    question: "Что такое веснянки?",
-                    options: [
-                        "Зимние песни",
-                        "Весенние песни встречи весны",
-                        "Летние хороводные песни",
-                        "Осенние жнивные песни"
-                    ],
-                    correct: 1,
-                    explanation: "Веснянки — весенние обрядовые песни встречи весны."
-                },
-                {
-                    question: "Какой праздник связан с летним солнцеворотом?",
-                    options: ["Масленица", "Иван Купала", "Коляда", "Обжинки"],
-                    correct: 1,
-                    explanation: "Иван Купала (7 июля) связан с летним солнцеворотом."
-                }
-            ],
-            crossword: {
-                words: [
-                    { word: 'КОЛЯДКИ', clue: 'Зимние обрядовые песни', across: true, row: 0, col: 0 },
-                    { word: 'ВЕСНЯНКИ', clue: 'Весенние песни', across: true, row: 2, col: 0 },
-                    { word: 'МАСЛЕНИЦА', clue: 'Проводы зимы', across: true, row: 4, col: 0 }
-                ]
-            },
-            wordSearch: {
-                words: ['КОЛЯДКИ', 'ВЕСНЯНКИ', 'МАСЛЕНИЦА', 'СВЯТКИ', 'КУПАЛА', 'ОБЖИНКИ', 'ЗАКЛИЧКИ']
-            },
-            emojis: [
-                { emojis: '🎄🎶🏠', answer: 'колядки', hint: 'Зимние обрядовые песни' },
-                { emojis: '☀️🌾', answer: 'иван купала', hint: 'Летний праздник' },
-                { emojis: '🌸🐦', answer: 'веснянки', hint: 'Весенние песни' },
-                { emojis: '🥞🔥🎭', answer: 'масленица', hint: 'Проводы зимы' }
-            ]
-        };
-
-        // Инициализация при загрузке
-        document.addEventListener('DOMContentLoaded', function() {
-            initQuiz(lesson3Data.quiz);
-            initCrossword(lesson3Data.crossword);
-            initWordSearch(lesson3Data.wordSearch);
-            initEmojiGame(lesson3Data.emojis);
-        });
-    </script>
 </body>
 </html>
